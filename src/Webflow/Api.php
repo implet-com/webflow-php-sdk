@@ -38,17 +38,17 @@ class Api
     {
         $curl = curl_init();
         $options = [
-        CURLOPT_URL => self::WEBFLOW_API_ENDPOINT . $path,
-        CURLOPT_CUSTOMREQUEST => $method,
-        CURLOPT_USERAGENT => self::WEBFLOW_API_USERAGENT,
-        CURLOPT_HTTPHEADER => [
-          "Authorization: Bearer {$this->token}",
-          "accept-version: {$this->version}",
-          "Accept: application/json",
-          "Content-Type: application/json",
-        ],
-        CURLOPT_HEADER => true,
-        CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_URL => self::WEBFLOW_API_ENDPOINT . $path,
+            CURLOPT_CUSTOMREQUEST => $method,
+            CURLOPT_USERAGENT => self::WEBFLOW_API_USERAGENT,
+            CURLOPT_HTTPHEADER => [
+                "Authorization: Bearer {$this->token}",
+                "accept-version: {$this->version}",
+                "Accept: application/json",
+                "Content-Type: application/json",
+            ],
+            CURLOPT_HEADER => true,
+            CURLOPT_RETURNTRANSFER => true,
         ];
         if (!empty($data)) {
             $json = json_encode($data);
@@ -135,8 +135,8 @@ class Api
     public function items(string $collectionId, int $offset = 0, int $limit = 100)
     {
         $query = http_build_query([
-        'offset' => $offset,
-        'limit' => $limit,
+            'offset' => $offset,
+            'limit' => $limit,
         ]);
         return $this->get("/collections/{$collectionId}/items?{$query}");
     }
@@ -168,7 +168,7 @@ class Api
         ];
 
         return $this->post("/collections/{$collectionId}/items", [
-          'fields' => array_merge($defaults, $fields),
+            'fields' => array_merge($defaults, $fields),
         ]);
     }
 
@@ -187,6 +187,13 @@ class Api
     public function updateItem(string $collectionId, string $itemId, array $fields)
     {
         return $this->put("/collections/{$collectionId}/items/{$itemId}", [
+            'fields' => $fields,
+        ]);
+    }
+
+    public function updateLiveItem(string $collectionId, string $itemId, array $fields)
+    {
+        return $this->put("/collections/{$collectionId}/items/{$itemId}?live=true", [
             'fields' => $fields,
         ]);
     }
