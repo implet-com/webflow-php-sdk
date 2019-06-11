@@ -172,6 +172,18 @@ class Api
         ]);
     }
 
+    public function createLiveItem(string $collectionId, array $fields)
+    {
+        $defaults = [
+            "_archived" => false,
+            "_draft" => false,
+        ];
+
+        return $this->post("/collections/{$collectionId}/items?live=true", [
+            'fields' => array_merge($defaults, $fields),
+        ]);
+    }
+
     public function updateItem(string $collectionId, string $itemId, array $fields)
     {
         return $this->put("/collections/{$collectionId}/items/{$itemId}", [

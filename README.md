@@ -16,6 +16,7 @@ Implementation based on [Webflow CMS API Reference](https://developers.webflow.c
 - **Find one or Create Item by Name**
 - Get Single Item
 - Create New Collection Item
+- Create New Live Collection Item
 - Update Collection Item
 - Patch Collection Item
 - Remove Collection Item
@@ -56,6 +57,15 @@ $fields = [
     # ...
 ];
 $webflow->createItem($collectionId, $fields);
+```
+
+### Create New LiveCollection Item
+```
+$fields = [
+    'name' => 'New item created via API',
+    # ...
+];
+$webflow->createLiveItem($collectionId, $fields);
 ```
 
 ### Update Collection Item
